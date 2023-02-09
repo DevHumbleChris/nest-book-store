@@ -37,3 +37,21 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## API routes
+
+```bash
+# Get all books
+GET api/books
+
+# Get book details of a specific id.
+GET api/book/:id
+
+# Add new Book.
+POST api/book/add-new
+
+# Update Book of a specific id.
+PUT api/book/:id/update
+
+# Delete Book of a specific id.
+DELETE api/book/:id/delete
