@@ -40,7 +40,7 @@ $ npm run test:cov
 
 ## API routes
 
-```bash
+```json
 # Get all books
 GET api/books
 
@@ -49,9 +49,21 @@ GET api/book/:id
 
 # Add new Book.
 POST api/book/add-new
+{
+  "title": "String",
+  "author": "String",
+  "imageURL": "String",
+  "type": "PString"
+}
 
 # Update Book of a specific id.
 PUT api/book/:id/update
+{
+  "title": "String",
+  "author": "String",
+  "imageURL": "String",
+  "type": "PString"
+}
 
 # Delete Book of a specific id.
 DELETE api/book/:id/delete
