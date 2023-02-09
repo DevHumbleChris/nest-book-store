@@ -5,10 +5,10 @@ import { BooksService } from 'src/services/books.service'
 
 @Controller('api')
 export class BooksController {
-    constructor(private BooksService: BooksService){}
+    constructor(private booksService: BooksService){}
 
     @Get('books')
     async getAllBooks(): Promise<Book[]> {
-        return this.BooksService.findAll()
+        return this.booksService.findAll()
     }
 }
