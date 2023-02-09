@@ -1,10 +1,10 @@
 {
   "name": "nest-book-store",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "<p align=\"center\">   <a href=\"http://nestjs.com/\" target=\"blank\"><img src=\"https://nestjs.com/img/logo-small.svg\" width=\"200\" alt=\"Nest Logo\" /></a> </p>",
+  "author": "AmChrisKE",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -67,5 +67,22 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevHumbleChris/nest-book-store.git"
+  },
+  "keywords": [
+    "nest",
+    "nest-book-store",
+    "api"
+  ],
+  "bugs": {
+    "url": "https://github.com/DevHumbleChris/nest-book-store/issues"
+  },
+  "homepage": "https://github.com/DevHumbleChris/nest-book-store#readme"
 }

@@ -17,4 +17,10 @@ export class BooksService {
             data,
         })
     }
+
+    async getBookDetails(where: Prisma.BookWhereUniqueInput): Promise<Book> {
+        return this.prisma.book.findUnique({
+            where
+        })
+    }
 }
