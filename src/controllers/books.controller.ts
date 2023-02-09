@@ -1,6 +1,15 @@
 /* eslint-disable prettier/prettier */
 import { Book as BookInterface } from 'src/interfaces/book.interface';
-import { Controller, Get, Post, Body, HttpCode, Param, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  HttpCode,
+  Param,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { BooksService } from 'src/services/books.service';
 import { Book } from '@prisma/client';
 
@@ -8,29 +17,44 @@ import { Book } from '@prisma/client';
 export class BooksController {
   constructor(private booksService: BooksService) {}
 
+  // Get All Books
   @Get('books')
   async getAllBooks(): Promise<Book[] | null> {
     return this.booksService.books();
   }
 
+  // Add New Book
   @Post('book/add-new')
   @HttpCode(200)
   async createBook(@Body() bookData: BookInterface): Promise<Book> {
     return this.booksService.createBook(bookData);
   }
 
+  // Get details of a specific book.
   @Get('book/:id')
   async getBookDetails(@Param('id') id: string): Promise<Book | null> {
     return this.booksService.getBookDetails({
-        id: Number(id),
+      id: Number(id),
     });
   }
 
+  // Update a Book with a specific id.
   @Put('book/:id/update')
-  async updateBookDetails(@Param('id') id: string, @Body() updateData: Book): Promise<Book> {
+  async updateBookDetails(
+    @Param('id') id: string,
+    @Body() updateData: Book,
+  ): Promise<Book> {
     return this.booksService.updateBookDetails({
-        where: { id: Number(id) },
-        data: updateData
-      })
+      where: { id: Number(id) },
+      data: updateData,
+    });
+  }
+
+  // Delete a Book with a specific id.
+  @Delete('book/:id/delete')
+  async deleteBook(@Param('id') id: string): Promise<Book> {
+    return this.booksService.deleteBook({
+      id: Number(id),
+    });
   }
 }
