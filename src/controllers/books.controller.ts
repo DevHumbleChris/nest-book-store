@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Book as BookInterface } from 'src/interfaces/book.interface';
-import { Controller, Get, Post, Body, HttpCode, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpCode, Param, Put } from '@nestjs/common';
 import { BooksService } from 'src/services/books.service';
 import { Book } from '@prisma/client';
 
@@ -24,5 +24,13 @@ export class BooksController {
     return this.booksService.getBookDetails({
         id: Number(id),
     });
+  }
+
+  @Put('book/:id/update')
+  async updateBookDetails(@Param('id') id: string, @Body() updateData: Book): Promise<Book> {
+    return this.booksService.updateBookDetails({
+        where: { id: Number(id) },
+        data: updateData
+      })
   }
 }
