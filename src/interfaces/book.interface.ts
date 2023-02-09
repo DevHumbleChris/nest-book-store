@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 export interface Book {
-    title: string,
-    type: string,
-    authorName: string,
-    photoURL: string
+  type: string;
+  title: string;
+  author: string;
+  imageURL: string;
 }

@@ -1,16 +1,20 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from "@nestjs/common";
-import { Book } from "src/interfaces/book.interface";
+// import { Book } from "src/interfaces/book.interface";
+import { Book, Prisma } from '@prisma/client'
+import { PrismaService } from "./prisma.service";
 
 @Injectable()
 export class BooksService {
-    private readonly books: Book[] = []
+    constructor(private prisma: PrismaService) {}
 
-    create(book: Book) {
-        this.books.push(book)
+    async books(): Promise<Book[] | null > {
+        return this.prisma.book.findMany()
     }
 
-    findAll(): Book[] {
-        return this.books
+    async createBook(data: Prisma.BookCreateInput): Promise<Book> {
+        return this.prisma.book.create({
+            data,
+        })
     }
 }

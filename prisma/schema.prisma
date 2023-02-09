@@ -15,4 +15,5 @@ model Book {
   title String
   author String
   imageURL String
+  type String
 }
