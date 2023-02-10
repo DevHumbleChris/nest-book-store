@@ -12,39 +12,48 @@ export class BooksService {
     const { title, author, type, search, page } = queries;
     let skip = 0;
     let take = 0;
-    if (Number(page) === 1) {
+    const newPageRequest = page ?  parseInt(page) : 1
+    if (newPageRequest === 1) {
       skip = 0;
       take = 10;
     } else {
-      skip = 10 * Number(page);
-      take = 10 * Number(page);
+      skip = 10 * newPageRequest;
+      take = 10 * newPageRequest;
     }
-    return this.prisma.book.findMany({
-      where: {
-        OR: [
-          {
-            title: {
-              startsWith: title || search,
-              mode: 'insensitive',
+
+    if (title || author || type || search) {
+      return this.prisma.book.findMany({
+        where: {
+          OR: [
+            {
+              title: {
+                startsWith: title || search,
+                mode: 'insensitive',
+              },
             },
-          },
-          {
-            author: {
-              startsWith: author || search,
-              mode: 'insensitive',
+            {
+              author: {
+                startsWith: author || search,
+                mode: 'insensitive',
+              },
             },
-          },
-          {
-            type: {
-              startsWith: type || search,
-              mode: 'insensitive',
+            {
+              type: {
+                startsWith: type || search,
+                mode: 'insensitive',
+              },
             },
-          },
-        ],
-      },
-      skip,
-      take,
-    });
+          ],
+        },
+        skip,
+        take,
+      });
+    } else {
+      return this.prisma.book.findMany({
+        skip,
+        take
+      })
+    }
   }
 
   async createBook(data: Prisma.BookCreateInput): Promise<Book> {
