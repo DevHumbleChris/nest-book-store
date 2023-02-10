@@ -9,9 +9,11 @@ import {
   Param,
   Put,
   Delete,
+  Query
 } from '@nestjs/common';
 import { BooksService } from 'src/services/books.service';
 import { Book } from '@prisma/client';
+import { Queries } from 'src/interfaces/queries.interface';
 
 @Controller('api')
 export class BooksController {
@@ -19,8 +21,8 @@ export class BooksController {
 
   // Get All Books
   @Get('books')
-  async getAllBooks(): Promise<Book[] | null> {
-    return this.booksService.books();
+  async getAllBooks(@Query() userQuery: Queries): Promise<Book[] | null> {
+    return this.booksService.books(userQuery);
   }
 
   // Add New Book
