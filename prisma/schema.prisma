@@ -3,7 +3,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -17,6 +16,4 @@ model Book {
   author String
   imageURL String
   type String
-
-  @@fulltext([title, author])
 }
