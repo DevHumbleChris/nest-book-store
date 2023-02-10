@@ -9,27 +9,41 @@ export class BooksService {
   constructor(private prisma: PrismaService) {}
 
   async books(queries: Queries): Promise<Book[] | null> {
-    const { title, author, type } = queries;
+    const { title, author, type, search, page } = queries;
+    let skip = 0;
+    let take = 0;
+    if (Number(page) === 1) {
+      skip = 0;
+      take = 10;
+    } else {
+      skip = 10 * Number(page);
+      take = 10 * Number(page);
+    }
     return this.prisma.book.findMany({
       where: {
         OR: [
           {
             title: {
-              contains: title,
+              startsWith: title || search,
+              mode: 'insensitive',
             },
           },
           {
             author: {
-              contains: author,
+              startsWith: author || search,
+              mode: 'insensitive',
             },
           },
           {
             type: {
-              contains: type,
+              startsWith: type || search,
+              mode: 'insensitive',
             },
           },
         ],
       },
+      skip,
+      take,
     });
   }
 
