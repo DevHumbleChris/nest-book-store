@@ -1,11 +1,11 @@
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.enableCors({
-    origin: 'https://book-store-ke.vercel.app/',
-    credentials: true,
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: true,
+    logger: ['error', 'warn', 'log', 'debug', 'verbose'],
   });
   await app.listen(3000);
 }
