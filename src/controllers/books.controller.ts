@@ -9,7 +9,8 @@ import {
   Param,
   Put,
   Delete,
-  Query
+  Query,
+  Header
 } from '@nestjs/common';
 import { BooksService } from 'src/services/books.service';
 import { Book } from '@prisma/client';
@@ -27,6 +28,7 @@ export class BooksController {
 
   // Add New Book
   @Post('book/add-new')
+  @Header('Access-Control-Allow-Origin', 'https://book-store-ke.vercel.app')
   @HttpCode(200)
   async createBook(@Body() bookData: BookInterface): Promise<Book> {
     return this.booksService.createBook(bookData);
@@ -42,6 +44,7 @@ export class BooksController {
 
   // Update a Book with a specific id.
   @Put('book/:id/update')
+  @Header('Access-Control-Allow-Origin', 'https://book-store-ke.vercel.app')
   async updateBookDetails(
     @Param('id') id: string,
     @Body() updateData: Book,
@@ -54,6 +57,7 @@ export class BooksController {
 
   // Delete a Book with a specific id.
   @Delete('book/:id/delete')
+  @Header('Access-Control-Allow-Origin', 'https://book-store-ke.vercel.app')
   async deleteBook(@Param('id') id: string): Promise<Book> {
     return this.booksService.deleteBook({
       id: Number(id),
